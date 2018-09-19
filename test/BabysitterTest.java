@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+
 import static org.junit.Assert.*;
 
 public class BabysitterTest {
@@ -13,15 +14,11 @@ public class BabysitterTest {
     }
 
     @Test
-    public void calcNightlyCharge_returns12DollarsPerHourBetweenStartTimeAndBedTime() {
-        assertEquals(12, babysitter.calcNightlyCharge(6, 7, 7));
-        assertEquals(36, babysitter.calcNightlyCharge(5, 8, 8));
+    public void calcNightlyCharge_canStartNoEarlierThan5PM() {
+        String startTime = "4:00 PM";
+
+        assertEquals("Invalid Time Entry.", babysitter.calcNightlyCharge(startTime));
     }
 
-    @Test
-    public void calcNightlyCharge_returnsCorrectRateBeforeAndAfterBedTime() {
-        assertEquals(32, babysitter.calcNightlyCharge(6, 9, 8));
-        assertEquals(76, babysitter.calcNightlyCharge(5, 12, 10));
-        assertEquals(24, babysitter.calcNightlyCharge(8, 11, 7));
-    }
+
 }
