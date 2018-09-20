@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 
 public class BabysitterTest {
 
-    Babysitter babysitter;
+    private Babysitter babysitter;
+    private String startTime;
+    private String endTime;
+    private String bedTime;
 
     @Before
     public void setUp() {
@@ -14,27 +17,27 @@ public class BabysitterTest {
 
     @Test
     public void calcNightlyCharge_canStartNoEarlierThan5PM() throws ParseException {
-        String startTime = "4:00 PM";
-        String endTime = "8:00 PM";
-        String bedTime = "8:00 PM";
+        startTime = "4:00 PM";
+        endTime = "8:00 PM";
+        bedTime = "8:00 PM";
 
         assertEquals("Starting time is too early.", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
 
     @Test
     public void calcNightlyCharge_canEndNoLaterThan4AM() throws ParseException {
-        String startTime = "5:00 PM";
-        String endTime = "5:00 AM";
-        String bedTime = "8:00 PM";
+        startTime = "5:00 PM";
+        endTime = "5:00 AM";
+        bedTime = "8:00 PM";
 
         assertEquals("Ending time is too late.", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
 
     @Test
     public void calcNightlyCharge_calculatesPayBetweenStartTimeAndBedTime() throws ParseException {
-        String startTime = "5:00 PM";
-        String endTime = "10:00 PM";
-        String bedTime = "8:00 PM";
+        startTime = "5:00 PM";
+        endTime = "10:00 PM";
+        bedTime = "8:00 PM";
 
         assertEquals("$36", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
