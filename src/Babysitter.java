@@ -5,9 +5,12 @@ import java.util.Date;
 public class Babysitter {
 
     private long wageBeforeBed = 12;
-    private int wageAfterBed = 8;
+    private long wageAfterBed = 8;
     private int wagePastMidnight = 16;
-    private int total;
+
+    private long total = 0;
+    private long amountFromStartToBedTime = 0;
+    private long amountFromBedTimeToMidnight = 0;
 
     public String calcNightlyCharge(String startTime, String endTime, String bedTime) throws ParseException {
 
@@ -27,9 +30,20 @@ public class Babysitter {
             return "Ending time is too late.";
         }
 
-        long difference = (bedTimeInHours - startTimeInHours) * wageBeforeBed;
-        String strDifference = "$" + Long.toString(difference);
-        return strDifference;
+        // convert 12:00 AM to 24th hour for evaluation
+        if (endTimeInHours == 0) {
+            endTimeInHours = 24;
+        }
+
+        if (endTimeInHours <= 24 && endTimeInHours > bedTimeInHours) {
+             amountFromBedTimeToMidnight = (endTimeInHours - bedTimeInHours) * wageAfterBed;
+        }
+
+        amountFromStartToBedTime = (bedTimeInHours - startTimeInHours) * wageBeforeBed;
+
+        total = amountFromStartToBedTime + amountFromBedTimeToMidnight;
+
+        return "$" + Long.toString(total);
     }
 
 }
