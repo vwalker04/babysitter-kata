@@ -55,4 +55,13 @@ public class BabysitterTest {
 
         assertEquals("$48", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
+
+    @Test
+    public void calcNightlyCharge_calculatePayBetweenMidnightAndEndOfJob() throws ParseException {
+        startTime = "8:00 pm";
+        endTime = "3:00 am";
+        bedTime = "10:00 pm";
+
+        assertEquals("$88", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
+    }
 }

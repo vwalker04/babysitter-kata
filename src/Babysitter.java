@@ -11,6 +11,7 @@ public class Babysitter {
     private long total = 0;
     private long amountFromStartToBedTime = 0;
     private long amountFromBedTimeToMidnight = 0;
+    private long amountFromMidnightToEndOfJob = 0;
 
     public String calcNightlyCharge(String startTime, String endTime, String bedTime) throws ParseException {
 
@@ -35,13 +36,19 @@ public class Babysitter {
             endTimeInHours = 24;
         }
 
-        if (endTimeInHours <= 24 && endTimeInHours > bedTimeInHours) {
-             amountFromBedTimeToMidnight = (endTimeInHours - bedTimeInHours) * wageAfterBed;
-        }
-
         amountFromStartToBedTime = (bedTimeInHours - startTimeInHours) * wageBeforeBed;
 
-        total = amountFromStartToBedTime + amountFromBedTimeToMidnight;
+        if (endTimeInHours <= 24 && endTimeInHours > bedTimeInHours) {
+            amountFromBedTimeToMidnight = (endTimeInHours - bedTimeInHours) * wageAfterBed;
+        } else if (endTimeInHours < 4) {
+            amountFromBedTimeToMidnight = (24 - bedTimeInHours) * wageAfterBed;
+        }
+
+        if (endTimeInHours > 0 && endTimeInHours < 4) {
+            amountFromMidnightToEndOfJob = endTimeInHours * wagePastMidnight;
+        }
+
+        total = amountFromStartToBedTime + amountFromBedTimeToMidnight + amountFromMidnightToEndOfJob;
 
         return "$" + Long.toString(total);
     }
