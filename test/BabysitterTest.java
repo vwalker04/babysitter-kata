@@ -20,7 +20,6 @@ public class BabysitterTest {
         startTime = "4:00 PM";
         endTime = "8:00 PM";
         bedTime = "8:00 PM";
-
         assertEquals("Starting time is too early.", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
 
@@ -29,7 +28,6 @@ public class BabysitterTest {
         startTime = "5:00 PM";
         endTime = "5:00 AM";
         bedTime = "8:00 PM";
-
         assertEquals("Ending time is too late.", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
 
@@ -38,13 +36,12 @@ public class BabysitterTest {
         startTime = "5:00 PM";
         endTime = "10:00 PM";
         bedTime = "8:00 PM";
-
         assertEquals("$52", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
 
-        startTime = "6:00 pm";
-        bedTime = "7:00 pm";
-
-        assertEquals("$36", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
+        startTime = "6:00 PM";
+        endTime = "11:00 PM";
+        bedTime = "7:00 PM";
+        assertEquals("$44", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
 
     @Test
@@ -52,16 +49,20 @@ public class BabysitterTest {
         startTime = "7:00 PM";
         endTime = "12:00 AM";
         bedTime = "9:00 PM";
-
         assertEquals("$48", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
 
     @Test
     public void calcNightlyCharge_calculatePayBetweenMidnightAndEndOfJob() throws ParseException {
-        startTime = "8:00 pm";
-        endTime = "3:00 am";
-        bedTime = "10:00 pm";
-
+        startTime = "8:00 PM";
+        endTime = "3:00 AM";
+        bedTime = "10:00 PM";
         assertEquals("$88", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
+
+        startTime = "5:00 PM";
+        endTime = "4:00 AM";
+        bedTime = "9:00 PM";
+
+        assertEquals("$136", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
 }

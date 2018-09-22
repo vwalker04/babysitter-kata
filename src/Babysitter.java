@@ -38,13 +38,15 @@ public class Babysitter {
 
         amountFromStartToBedTime = (bedTimeInHours - startTimeInHours) * wageBeforeBed;
 
-        if (endTimeInHours <= 24 && endTimeInHours > bedTimeInHours) {
-            amountFromBedTimeToMidnight = (endTimeInHours - bedTimeInHours) * wageAfterBed;
-        } else if (endTimeInHours < 4) {
+        if (endTimeInHours >= 1 && endTimeInHours <= 4) {
             amountFromBedTimeToMidnight = (24 - bedTimeInHours) * wageAfterBed;
+        } else if (endTimeInHours < bedTimeInHours) {
+            amountFromBedTimeToMidnight = ((endTimeInHours + 12) - bedTimeInHours) * wageAfterBed;
+        } else {
+            amountFromBedTimeToMidnight = (endTimeInHours - bedTimeInHours) * wageAfterBed;
         }
 
-        if (endTimeInHours > 0 && endTimeInHours < 4) {
+        if (endTimeInHours >= 1 && endTimeInHours <= 4) {
             amountFromMidnightToEndOfJob = endTimeInHours * wagePastMidnight;
         }
 
