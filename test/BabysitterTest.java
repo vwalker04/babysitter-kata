@@ -9,6 +9,7 @@ public class BabysitterTest {
     private String startTime;
     private String endTime;
     private String bedTime;
+    private String errorMsg = "Improper times entered.";
 
     @Before
     public void setUp() {
@@ -16,19 +17,32 @@ public class BabysitterTest {
     }
 
     @Test
-    public void calcNightlyCharge_canStartNoEarlierThan5PM() throws ParseException {
+    public void calcNightlyCharge_returnsErrorWhenStartingBefore5PM() throws ParseException {
         startTime = "4:00 PM";
         endTime = "8:00 PM";
         bedTime = "8:00 PM";
-        assertEquals("Starting time is too early.", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
+        assertEquals(errorMsg, babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
 
     @Test
-    public void calcNightlyCharge_canEndNoLaterThan4AM() throws ParseException {
+    public void calcNightlyCharge_returnsErrorWhenEndingLaterThan4AM() throws ParseException {
         startTime = "5:00 PM";
         endTime = "5:00 AM";
         bedTime = "8:00 PM";
-        assertEquals("Ending time is too late.", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
+        assertEquals(errorMsg, babysitter.calcNightlyCharge(startTime, endTime, bedTime));
+    }
+
+    @Test
+    public void calcNightlyCharge_returnsErrorWhenEndingTimeComesBeforeStartingTime() throws ParseException {
+        startTime = "6:00 PM";
+        endTime = "5:00 PM";
+        bedTime = "8:00 PM";
+        assertEquals(errorMsg, babysitter.calcNightlyCharge(startTime, endTime, bedTime));
+
+        startTime = "1:00 AM";
+        endTime = "9:00 PM";
+        bedTime = "8:00 PM";
+        assertEquals(errorMsg, babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
 
     @Test
@@ -68,7 +82,7 @@ public class BabysitterTest {
         startTime = "5:00 PM";
         endTime = "4:00 AM";
         bedTime = "9:00 PM";
-
         assertEquals("$136", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
+
 }

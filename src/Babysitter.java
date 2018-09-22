@@ -4,9 +4,11 @@ import java.util.Date;
 
 public class Babysitter {
 
+    String errorMsg = "Improper times entered.";
+
     private long wageBeforeBed = 12;
     private long wageAfterBed = 8;
-    private int wagePastMidnight = 16;
+    private long wagePastMidnight = 16;
 
     private long total = 0;
     private long amountFromStartToBedTime = 0;
@@ -25,10 +27,8 @@ public class Babysitter {
         long endTimeInHours = (time2.getTime() / 3600000) - 5;
         long bedTimeInHours = (time3.getTime() / 3600000) - 5;
 
-        if (startTimeInHours < 17) {
-            return "Starting time is too early.";
-        } else if (endTimeInHours < 17 && endTimeInHours > 4) {
-            return "Ending time is too late.";
+        if (startTimeInHours < 17 || (endTimeInHours > 4 && endTimeInHours <= 17)) {
+            return errorMsg;
         }
 
         // convert 12:00 AM to 24th hour for evaluation
@@ -54,5 +54,4 @@ public class Babysitter {
 
         return "$" + Long.toString(total);
     }
-
 }
