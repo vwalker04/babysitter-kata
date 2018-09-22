@@ -50,6 +50,12 @@ public class BabysitterTest {
         endTime = "12:00 AM";
         bedTime = "9:00 PM";
         assertEquals("$48", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
+
+        startTime = "6:00 PM";
+        endTime = "11:00 PM";
+        bedTime = "8:00 PM";
+        assertEquals("$48", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
+
     }
 
     @Test
