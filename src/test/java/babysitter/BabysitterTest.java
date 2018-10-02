@@ -1,3 +1,5 @@
+package babysitter;
+
 import org.junit.Before;
 import org.junit.Test;
 import java.text.ParseException;
@@ -38,11 +40,6 @@ public class BabysitterTest {
         endTime = "5:00 PM";
         bedTime = "8:00 PM";
         assertEquals(errorMsg, babysitter.calcNightlyCharge(startTime, endTime, bedTime));
-
-        startTime = "1:00 AM";
-        endTime = "9:00 PM";
-        bedTime = "8:00 PM";
-        assertEquals(errorMsg, babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
 
     @Test
@@ -51,11 +48,6 @@ public class BabysitterTest {
         endTime = "10:00 PM";
         bedTime = "8:00 PM";
         assertEquals("$52", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
-
-        startTime = "6:00 PM";
-        endTime = "11:00 PM";
-        bedTime = "7:00 PM";
-        assertEquals("$44", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
 
     @Test
@@ -64,12 +56,6 @@ public class BabysitterTest {
         endTime = "12:00 AM";
         bedTime = "9:00 PM";
         assertEquals("$48", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
-
-        startTime = "6:00 PM";
-        endTime = "11:00 PM";
-        bedTime = "8:00 PM";
-        assertEquals("$48", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
-
     }
 
     @Test
@@ -78,11 +64,5 @@ public class BabysitterTest {
         endTime = "3:00 AM";
         bedTime = "10:00 PM";
         assertEquals("$88", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
-
-        startTime = "5:00 PM";
-        endTime = "4:00 AM";
-        bedTime = "9:00 PM";
-        assertEquals("$136", babysitter.calcNightlyCharge(startTime, endTime, bedTime));
     }
-
 }
